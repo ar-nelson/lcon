@@ -1,0 +1,23 @@
+{
+  "name": "lcon",
+  "version": "0.1.3",
+  "description": "Ludicrously Compact Object Notation - Indentation-sensitive alternate JSON format",
+  "homepage":  "https://github.com/ar-nelson/lcon",
+  "main": "lcon.js",
+  "author": {
+    "name": "Adam R. Nelson",
+    "email": "dev@sector91.com"
+  },
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "format-json": "^1.0.3",
+    "nomnom": "^1.8.0",
+    "underscore": "^1.6.0"
+  },
+  "devDependencies": {
+    "typescript": "^1.0.1"
+  },
+  "bin": {
+    "lcon": "bin/lcon.bin.js"
+  }
+}

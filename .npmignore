@@ -1,0 +1,7 @@
+*.ts
+typings/
+node_modules/
+obj/
+.gitignore
+.ntvs_analysis.dat
+*.njsproj
