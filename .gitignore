@@ -1,4 +1,6 @@
 .ntvs_analysis.dat
+*.suo
+*.swp
 *.js
 *.js.map
 node_modules/

@@ -13,7 +13,7 @@
     <ProjectGuid>62d70a64-f32a-40c5-87be-5e0756fb6067</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>app.js</StartupFile>
+    <StartupFile>bin\lcon.bin.js</StartupFile>
     <StartWebBrowser>False</StartWebBrowser>
     <SearchPath>
     </SearchPath>

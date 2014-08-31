@@ -5,3 +5,5 @@ obj/
 .gitignore
 .ntvs_analysis.dat
 *.njsproj
+*.sln
+*.suo
