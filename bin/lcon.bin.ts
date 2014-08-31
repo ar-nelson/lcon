@@ -8,6 +8,11 @@ import _      = require('underscore')
 import fs     = require('fs')
 var formatJson = require('format-json')
 
+if (process.argv.length <= 2) {
+  // Print a help message if there are no arguments.
+  process.argv.push("--help")
+}
+
 var opts = nomnom.script("lcon").options({
   stdout: {
     abbr: 's',
