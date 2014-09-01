@@ -99,36 +99,36 @@ From [json.org](http://json.org/example):
             para ``
               A meta-markup language, used to create markup languages such as DocBook.
             GlossSeeAlso
-            . GML
-            . XML
+            - GML
+            - XML
           GlossSee markup
 
 An example of a [Facebook JSON file](http://www.sitepoint.com/facebook-json-example/):
 
      data
-     . id X999_Y999
+     - id X999_Y999
        from
          name "Tom Brady"
          id X12
        message "Looking forward to 2010!"
        actions
-       . name Comment
+       - name Comment
          link "http://www.facebook.com/X999/posts/Y999"
-       . name Like
+       - name Like
          link "http://www.facebook.com/X999/posts/Y999"
        type status
        created_time "2010-08-02T21:27:44+0000"
        updated_time "2010-08-02T21:27:44+0000"
 
-     . id X998_Y998
+     - id X998_Y998
        from
          name "Peyton Manning"
          id X18
        message "Where's my contract?"
        actions
-       . name Comment
+       - name Comment
          link "http://www.facebook.com/X998/posts/Y998"
-       . name Like
+       - name Like
          link "http://www.facebook.com/X998/posts/Y998"
        type status
        created_time "2010-08-02T21:27:44+0000"
@@ -145,10 +145,10 @@ A full JSON schema for a [UNIX fstab-like file](http://json-schema.org/example2.
       storage
         type object
         oneOf
-        . $ref "#/definitions/diskDevice"
-        . $ref "#/definitions/diskUUID"
-        . $ref "#/definitions/nfs"
-        . $ref "#/definitions/tmpfs"
+        - $ref "#/definitions/diskDevice"
+        - $ref "#/definitions/diskUUID"
+        - $ref "#/definitions/nfs"
+        - $ref "#/definitions/tmpfs"
       fstype enum [ext3, ext4, btrfs]
       options
         type array
@@ -184,9 +184,9 @@ A full JSON schema for a [UNIX fstab-like file](http://json-schema.org/example2.
           server
             type string
             oneOf
-            . format host-name
-            . format ipv4
-            . format ipv6
+            - format host-name
+            - format ipv4
+            - format ipv6
         required [type, server, remotePath]
         additionalProperties false
       tmpfs
@@ -244,34 +244,34 @@ Part of this is an extension of the inferred punctuation feature: when two key-v
 
 #### Bulleted Lists
 
-LCON also supports indentation-sensitive lists, silimar to YAML's bulleted lists. While YAML uses the `-` character as a bullet, LCON uses `.`.
+LCON also supports indentation-sensitive lists, silimar to YAML's bulleted lists. Like YAML, it uses the `-` character as a bullet.
 
     "list"
-      . "first item"
-      . "key1" "value1"
+      - "first item"
+      - "key1" "value1"
         "key2" "value2"
-      . "third item"
+      - "third item"
 
 LCON also interprets bullets at the same indentation depth as a key to be under that key, allowing two-space indentation.
 
     "list"
-    . 1
-    . "nested list"
-      . 10
-      . 20
-      . 30
-    . 3
+    - 1
+    - "nested list"
+      - 10
+      - 20
+      - 30
+    - 3
 
 To nest a list as an element of another list, start a new line immediately after a bullet.
 
-    .
-      . 5
-      . 10
-    .
-      . 50
-      . 100
+    -
+      - 5
+      - 10
+    -
+      - 50
+      - 100
 
-A bullet must be the first non-whitespace chartacter on a line, and must be surrounded by whitespace; a `.` connected to other characters will be interpreted as part of a number or unquoted string.
+A bullet must be the first non-whitespace chartacter on a line, and must be surrounded by whitespace; a `-` connected to other characters will be interpreted as part of a number or unquoted string.
 
 #### Comma Matching
 
@@ -335,10 +335,10 @@ Here are a few examples from previous sections, rewritten with unquoted strings:
 ---
 
     list
-      . "first item"
-      . key1 value1
+      - "first item"
+      - key1 value1
         key2 value2
-      . "third item"
+      - "third item"
 
 ---
 
@@ -352,9 +352,9 @@ Here are a few examples from previous sections, rewritten with unquoted strings:
 
 The following characters, as well as all whitespace characters, are reserved in LCON:
 
-    {}[](),.;:"`
+    {}[](),;:"`
 
-These characters cannot be used as part of an unquoted string (except for `.`, which is only reserved when it is a single word surrounded by whitespace; see the section on bulleted lists).
+These characters cannot be used as part of an unquoted string. Additionally, the string `-` is reserved as a bullet symbol, and must be quoted if used as a string. The character `-` can still be used as part of an unquoted string, as long as it is not the only character.
 
 ### Parentheses
 

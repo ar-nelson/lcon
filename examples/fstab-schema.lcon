@@ -10,10 +10,10 @@ properties
   storage
     type object
     oneOf
-    . $ref "#/definitions/diskDevice"
-    . $ref "#/definitions/diskUUID"
-    . $ref "#/definitions/nfs"
-    . $ref "#/definitions/tmpfs"
+    - $ref "#/definitions/diskDevice"
+    - $ref "#/definitions/diskUUID"
+    - $ref "#/definitions/nfs"
+    - $ref "#/definitions/tmpfs"
   fstype enum [ext3, ext4, btrfs]
   options
     type array
@@ -49,9 +49,9 @@ definitions
       server
         type string
         oneOf
-        . format host-name
-        . format ipv4
-        . format ipv6
+        - format host-name
+        - format ipv4
+        - format ipv6
     required [type, server, remotePath]
     additionalProperties false
   tmpfs

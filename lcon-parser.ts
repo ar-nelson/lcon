@@ -171,7 +171,7 @@ export function parseTokens(tokens: lexer.Token[]): any {
             if (state && state.isArray) {
               chain = _.last(stack)
               subState = SubState.Value
-            } else error("Bullets (.) are not valid outside of an array", currentToken)
+            } else error("Bullets (-) are not valid outside of an array", currentToken)
             break
           default:
             unexpected(currentToken) // TODO: More informative error message?

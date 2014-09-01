@@ -9,39 +9,39 @@ with-conveniences ;; $ for get
   do
     until get-var done
     do seq
-    . print! "calculator> "
-    . for-each
+    - print! "calculator> "
+    - for-each
         split-string read-line!()
         on-regex     \s+
       do (lambda x, =>
         cond
-        . case number? $x
+        - case number? $x
           =>
             push! number-from-string $x
             onto-stack $stack
-        . case operator? $x
+        - case operator? $x
           => print-line! join [$x, ": ", perform-operation! $x]
-        . case (eq? $x, to "exit")
+        - case (eq? $x, to "exit")
           => seq
-          . (set-var! done, to false)
-          . print-line! "Goodbye!"
+          - (set-var! done, to false)
+          - print-line! "Goodbye!"
         otherwise
           print-line! join ["Invalid input: ", $x])
   
   where-defined
-  . *value stack
+  - *value stack
     is var []
-  . *value done
+  - *value done
     is var false
-  . *function number? s
+  - *function number? s
     is
       regex `` ^[+-]?\d+([.]\d+)?([Ee][+-]\d+)?$
       matches? $s
-  . *function operator? s
+  - *function operator? s
     is
       any-of [+, -, *, /, %]
       is? (lambda op, => (eq? $op, to $s))
-  . *function perform-operation! op
+  - *function perform-operation! op
     is
       try
         let
@@ -50,10 +50,10 @@ with-conveniences ;; $ for get
         in
           match $op
           to
-          . (case +, => (add $a, to $b))
-          . (case -, => (subtract $b, from $a))
-          . (case *, => (multiply $a, by $b))
-          . (case /, => (divide $a, by $b))
-          . (case %, => (remainder-of $a, divided-by $b))
+          - (case +, => (add $a, to $b))
+          - (case -, => (subtract $b, from $a))
+          - (case *, => (multiply $a, by $b))
+          - (case /, => (divide $a, by $b))
+          - (case %, => (remainder-of $a, divided-by $b))
           otherwise "Not an operator"
       catch "Stack underflow"

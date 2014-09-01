@@ -27,7 +27,7 @@ export interface SourceLocation {
 
 export class Lexer {
 
-  static NEWLINE = /^((?:\s|;[^\n]*)*)\n([^\S\n]*[.][^\S\n]+|[^\S\n]*[.](?=[\s(\[{;"`])|[^\S\n]*)/
+  static NEWLINE = /^((?:\s|;[^\n]*)*)\n([^\S\n]*-[^\S\n]+|[^\S\n]*-(?=[\s(\[{;"`])|[^\S\n]*)/
   static BLOCK_NEWLINE = /^\n([^\S\n]*)([^\n]*)/
   static WHITESPACE = /^[^\S\n]+/
   static LINE_COMMENT = /^\s*;[^\n]*/
@@ -162,11 +162,11 @@ export class Lexer {
           if (indent > currentIndents[i]) {
             currentIndents.push(indent)
             this.token(TokenType.Indent, indent.toString(), match[1].length + 1, indent)
-          } else if (match[2].indexOf(".") == -1) {
+          } else if (match[2].indexOf("-") == -1) {
             this.token(TokenType.Newline, "\\n", match[1].length, 1)
           }
-          if (match[2].indexOf(".") > -1) {
-            this.token(TokenType.Bullet, ".", match[1].length + 1 + match[2].indexOf("."), 1)
+          if (match[2].indexOf("-") > -1) {
+            this.token(TokenType.Bullet, "-", match[1].length + 1 + match[2].indexOf("-"), 1)
           }
           return match[0].length
         }
