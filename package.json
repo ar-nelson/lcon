@@ -1,6 +1,6 @@
 {
   "name": "lcon",
-  "version": "0.1.3",
+  "version": "1.0.0-git",
   "description": "Ludicrously Compact Object Notation - Indentation-sensitive alternate JSON format",
   "homepage":  "https://github.com/ar-nelson/lcon",
   "main": "lcon.js",
