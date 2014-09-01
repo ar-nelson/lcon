@@ -163,7 +163,7 @@ A full JSON schema for a [UNIX fstab-like file](http://json-schema.org/example2.
           type enum [disk]
           device
             type string
-            pattern `` ^/dev/[^/]+(/[^/]+)*$
+            pattern """ ^/dev/[^/]+(/[^/]+)*$
         required [type, device]
         additionalProperties false
       diskUUID
@@ -171,7 +171,7 @@ A full JSON schema for a [UNIX fstab-like file](http://json-schema.org/example2.
           type enum [disk]
           label
             type string
-            pattern ``
+            pattern """
               ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
         required [type, label]
         additionalProperties false
@@ -180,7 +180,7 @@ A full JSON schema for a [UNIX fstab-like file](http://json-schema.org/example2.
           type enum [nfs]
           remotePath
             type string
-            pattern `` ^(/[^/]+)+$
+            pattern """ ^(/[^/]+)+$
           server
             type string
             oneOf
@@ -314,13 +314,17 @@ Within literal braces, commas may be either written or inferred. Writing a liter
 
 #### Block Strings
 
-If a line ends with a double-backtick (``` `` ```), all indented text after that line is interpreted as a string. This text is completely literal, with no support for escapes; this behavior is identical to YAML's literal block scalars.
+If a line ends with a triple quote (`"""`), all indented text after that line is interpreted as a string. This text is completely literal, with no support for escapes; this behavior is identical to YAML's literal block scalars.
 
     "name": "Bob"
     "age": 33
-    "address": ``
+    "address": """
       91 Fake St.
       Zzyzx, CA 92309
+
+Any text that follows the `"""` on the same line is also part of the block string; one-line block strings are useful for raw text, like regexes.
+
+    "regex": """ \b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b
 
 #### Unquoted Strings
 
@@ -344,7 +348,7 @@ Here are a few examples from previous sections, rewritten with unquoted strings:
 
     name Bob
     age 33
-    address ``
+    address """
       91 Fake St.
       Zzyzx, CA 92309
 
@@ -352,7 +356,7 @@ Here are a few examples from previous sections, rewritten with unquoted strings:
 
 The following characters, as well as all whitespace characters, are reserved in LCON:
 
-    {}[](),:"`#
+    {}[](),:"#
 
 These characters cannot be used as part of an unquoted string. Additionally, the string `-` is reserved as a bullet symbol, and must be quoted if used as a string. The character `-` can still be used as part of an unquoted string, as long as it is not the only character.
 
@@ -381,7 +385,7 @@ LCON block comments work like block strings. A block comment starts with the seq
       #:
         This is a comment, not part of the data.
         Still a comment!
-      address ``
+      address """
         91 Fake St.
         Zzyzx, CA 92309
 

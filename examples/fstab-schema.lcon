@@ -28,7 +28,7 @@ definitions
       type enum [disk]
       device
         type string
-        pattern `` ^/dev/[^/]+(/[^/]+)*$
+        pattern """ ^/dev/[^/]+(/[^/]+)*$
     required [type, device]
     additionalProperties false
   diskUUID
@@ -36,7 +36,7 @@ definitions
       type enum [disk]
       label
         type string
-        pattern ``
+        pattern """
           ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
     required [type, label]
     additionalProperties false
@@ -45,7 +45,7 @@ definitions
       type enum [nfs]
       remotePath
         type string
-        pattern `` ^(/[^/]+)+$
+        pattern """ ^(/[^/]+)+$
       server
         type string
         oneOf

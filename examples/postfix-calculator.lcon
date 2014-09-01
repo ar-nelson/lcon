@@ -35,7 +35,10 @@ with-conveniences # $ for get
     is var false
   - *function number? s
     is
-      regex `` ^[+-]?\d+([.]\d+)?([Ee][+-]\d+)?$
+	 
+	  # TODO CONTINUE HERE - THE BELOW CODE DOESN'T PARSE!
+
+      regex """ ^[+-]?\d+([.]\d+)?([Ee][+-]\d+)?$
       matches? $s
   - *function operator? s
     is

@@ -2,6 +2,7 @@
 
 ## 1.0.0-git
 
+- Changed block string delimiter from double-backtick to triple-quote.
 - Changed comment character from `;` to `#`.
 - Changed bullet character from `.` to `-`.
 - Removed single-quoted strings.
