@@ -20,8 +20,8 @@ with-conveniences ;; $ for get
             push! number-from-string $x
             onto-stack $stack
         . case operator? $x
-          => print-line! join [$x, ': ', perform-operation! $x]
-        . case (eq? $x, to 'exit')
+          => print-line! join [$x, ": ", perform-operation! $x]
+        . case (eq? $x, to "exit")
           => seq
           . (set-var! done, to false)
           . print-line! "Goodbye!"
@@ -35,7 +35,7 @@ with-conveniences ;; $ for get
     is var false
   . *function number? s
     is
-      regex '^[+-]?\d+([.]\d+)?([Ee][+-]\d+)?$'
+      regex `` ^[+-]?\d+([.]\d+)?([Ee][+-]\d+)?$
       matches? $s
   . *function operator? s
     is

@@ -113,12 +113,12 @@ An example of a [Facebook JSON file](http://www.sitepoint.com/facebook-json-exam
        message "Looking forward to 2010!"
        actions
        . name Comment
-         link 'http://www.facebook.com/X999/posts/Y999'
+         link "http://www.facebook.com/X999/posts/Y999"
        . name Like
-         link 'http://www.facebook.com/X999/posts/Y999'
+         link "http://www.facebook.com/X999/posts/Y999"
        type status
-       created_time '2010-08-02T21:27:44+0000'
-       updated_time '2010-08-02T21:27:44+0000'
+       created_time "2010-08-02T21:27:44+0000"
+       updated_time "2010-08-02T21:27:44+0000"
 
      . id X998_Y998
        from
@@ -127,17 +127,17 @@ An example of a [Facebook JSON file](http://www.sitepoint.com/facebook-json-exam
        message "Where's my contract?"
        actions
        . name Comment
-         link 'http://www.facebook.com/X998/posts/Y998'
+         link "http://www.facebook.com/X998/posts/Y998"
        . name Like
-         link 'http://www.facebook.com/X998/posts/Y998'
+         link "http://www.facebook.com/X998/posts/Y998"
        type status
-       created_time '2010-08-02T21:27:44+0000'
-       updated_time '2010-08-02T21:27:44+0000'
+       created_time "2010-08-02T21:27:44+0000"
+       updated_time "2010-08-02T21:27:44+0000"
 
 A full JSON schema for a [UNIX fstab-like file](http://json-schema.org/example2.html) (this makes more extensive use of one of LCON's space-saving features: a sequence of space-separated strings become nested single-element objects):
 
-    id 'http://some.site.somewhere/entry-schema#'
-    $schema 'http://json-schema.org/draft-04/schema#'
+    id "http://some.site.somewhere/entry-schema#"
+    $schema "http://json-schema.org/draft-04/schema#"
     description "schema for an fstab entry"
     type object
     required [storage]
@@ -145,10 +145,10 @@ A full JSON schema for a [UNIX fstab-like file](http://json-schema.org/example2.
       storage
         type object
         oneOf
-        . $ref #/definitions/diskDevice
-        . $ref #/definitions/diskUUID
-        . $ref #/definitions/nfs
-        . $ref #/definitions/tmpfs
+        . $ref "#/definitions/diskDevice"
+        . $ref "#/definitions/diskUUID"
+        . $ref "#/definitions/nfs"
+        . $ref "#/definitions/tmpfs"
       fstype enum [ext3, ext4, btrfs]
       options
         type array
@@ -163,7 +163,7 @@ A full JSON schema for a [UNIX fstab-like file](http://json-schema.org/example2.
           type enum [disk]
           device
             type string
-            pattern '^/dev/[^/]+(/[^/]+)*$'
+            pattern `` ^/dev/[^/]+(/[^/]+)*$
         required [type, device]
         additionalProperties false
       diskUUID
@@ -180,7 +180,7 @@ A full JSON schema for a [UNIX fstab-like file](http://json-schema.org/example2.
           type enum [nfs]
           remotePath
             type string
-            pattern '^(/[^/]+)+$'
+            pattern `` ^(/[^/]+)+$
           server
             type string
             oneOf
@@ -312,17 +312,13 @@ Within literal braces, commas may be either written or inferred. Writing a liter
 
 ### Strings
 
-#### Single-quoted Strings
-
-Strings in LCON may be surrounded with single quotes (`'`) as well as double quotes (`"`). Escapes are not parsed within single-quoted strings, although the sequence `''` is interpreted as a literal `'`. Like double-quoted strings, single-quoted strings can span multiple lines.
-
 #### Block Strings
 
 If a line ends with a double-backtick (``` `` ```), all indented text after that line is interpreted as a string. This text is completely literal, with no support for escapes; this behavior is identical to YAML's literal block scalars.
 
-    'name': 'Bob'
-    'age': 33
-    'address': ``
+    "name": "Bob"
+    "age": 33
+    "address": ``
       91 Fake St.
       Zzyzx, CA 92309
 
@@ -339,10 +335,10 @@ Here are a few examples from previous sections, rewritten with unquoted strings:
 ---
 
     list
-      . 'first item'
+      . "first item"
       . key1 value1
         key2 value2
-      . 'third item'
+      . "third item"
 
 ---
 
@@ -356,7 +352,7 @@ Here are a few examples from previous sections, rewritten with unquoted strings:
 
 The following characters, as well as all whitespace characters, are reserved in LCON:
 
-    {}[](),.;:'"`
+    {}[](),.;:"`
 
 These characters cannot be used as part of an unquoted string (except for `.`, which is only reserved when it is a single word surrounded by whitespace; see the section on bulleted lists).
 

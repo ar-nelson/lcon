@@ -1,8 +1,8 @@
 ;; A full JSON schema for a UNIX fstab-like file
 ;; http://json-schema.org/example2.html
 
-id 'http://some.site.somewhere/entry-schema#'
-$schema 'http://json-schema.org/draft-04/schema#'
+id "http://some.site.somewhere/entry-schema#"
+$schema "http://json-schema.org/draft-04/schema#"
 description "schema for an fstab entry"
 type object
 required [storage]
@@ -10,10 +10,10 @@ properties
   storage
     type object
     oneOf
-    . $ref #/definitions/diskDevice
-    . $ref #/definitions/diskUUID
-    . $ref #/definitions/nfs
-    . $ref #/definitions/tmpfs
+    . $ref "#/definitions/diskDevice"
+    . $ref "#/definitions/diskUUID"
+    . $ref "#/definitions/nfs"
+    . $ref "#/definitions/tmpfs"
   fstype enum [ext3, ext4, btrfs]
   options
     type array
@@ -28,7 +28,7 @@ definitions
       type enum [disk]
       device
         type string
-        pattern '^/dev/[^/]+(/[^/]+)*$'
+        pattern `` ^/dev/[^/]+(/[^/]+)*$
     required [type, device]
     additionalProperties false
   diskUUID
@@ -45,7 +45,7 @@ definitions
       type enum [nfs]
       remotePath
         type string
-        pattern '^(/[^/]+)+$'
+        pattern `` ^(/[^/]+)+$
       server
         type string
         oneOf

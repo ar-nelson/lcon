@@ -27,12 +27,12 @@ export interface SourceLocation {
 
 export class Lexer {
 
-  static NEWLINE = /^((?:\s|;[^\n]*)*)\n([^\S\n]*[.][^\S\n]+|[^\S\n]*[.](?=[\s(\[{;'"`])|[^\S\n]*)/
+  static NEWLINE = /^((?:\s|;[^\n]*)*)\n([^\S\n]*[.][^\S\n]+|[^\S\n]*[.](?=[\s(\[{;"`])|[^\S\n]*)/
   static BLOCK_NEWLINE = /^\n([^\S\n]*)([^\n]*)/
   static WHITESPACE = /^[^\S\n]+/
   static LINE_COMMENT = /^\s*;[^\n]*/
   static BLOCK_COMMENT = /^;[:][^\n]*/
-  static UNQUOTED_STRING = /^[^\s()\[\]{},;:'"`]+/
+  static UNQUOTED_STRING = /^[^\s()\[\]{},;:"`]+/
   static BLOCK_STRING = /^``[^\S\n]*([^\n]*)/
   static OPEN_PAREN = /^[(](?:\s*\n([^\S\n]*)|\s*)/
   static CLOSE_PAREN = /^\s*[)]/
@@ -219,12 +219,6 @@ export class Lexer {
       if (str == "true" || str == "false" || str == "null" || str == ".") return 0
       this.token(TokenType.String, str, 0, str.length)
       return str.length
-    } else if (this.chunk.charAt(0) == "'") {
-      if (!(match = /^'((?:''|[^'])*)'/.exec(this.chunk))) {
-        this.error("Unclosed single-quoted string")
-      }
-      this.token(TokenType.String, match[1].replace("''", "'"), 0, match[0].length)
-      return match[0].length
     } else if (this.chunk.charAt(0) == '"') {
       for (
         strChunk = this.chunk.substring(1), str = "", len = 1;
@@ -241,7 +235,7 @@ export class Lexer {
           len += resultAndLength.length
         }
       }
-      if (strChunk.length == 0) this.error("Unclosed double-quoted string")
+      if (strChunk.length == 0) this.error("Unclosed string")
       this.token(TokenType.String, str, 0, len + 1)
       return len + 1
     } else if (this.chunk.charAt(0) == '`' && (match = Lexer.BLOCK_STRING.exec(this.chunk))) {
