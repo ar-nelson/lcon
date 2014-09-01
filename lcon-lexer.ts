@@ -3,7 +3,7 @@ import _ = require('underscore')
 
 export enum TokenType {
   True, False, Null, Number, String,
-  Colon, Comma, Bullet, Newline,
+  Comma, Bullet, Newline,
   OpeningParen, ClosingParen, OpeningBracket, ClosingBracket, OpeningBrace, ClosingBrace,
   Indent, Outdent
 }
@@ -118,7 +118,7 @@ export class Lexer {
       this.token(TokenType.Comma, ",", 0, match[0].length)
       this.resetIndents(match[1] ? match[1].length : 0)
     } else if (match = Lexer.COLON.exec(this.chunk)) {
-      this.token(TokenType.Colon, ":", 0, match[0].length)
+      // Do nothing. A colon is treated as whitespace.
     } else return 0
     return match[0].length
   }
