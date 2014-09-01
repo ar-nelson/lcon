@@ -352,7 +352,7 @@ Here are a few examples from previous sections, rewritten with unquoted strings:
 
 The following characters, as well as all whitespace characters, are reserved in LCON:
 
-    {}[](),;:"`
+    {}[](),:"`#
 
 These characters cannot be used as part of an unquoted string. Additionally, the string `-` is reserved as a bullet symbol, and must be quoted if used as a string. The character `-` can still be used as part of an unquoted string, as long as it is not the only character.
 
@@ -367,18 +367,18 @@ Parentheses can be used for objects instead of braces. This is purely for aesthe
 
 #### Line Comments
 
-LCON line comments start with `;`, exactly like Lisp comments.
+LCON line comments start with `#`, exactly like YAML comments.
 
-    a b c d ; This is three nested objects.
+    a b c d # This is three nested objects.
 
 #### Block Comments
 
-LCON block comments work like block strings. A block comment starts with the sequence `;:`, and includes all indented text following the `;:`.
+LCON block comments work like block strings. A block comment starts with the sequence `#:`, and includes all indented text following the `#:`.
 
     person
       name Bob
       age 33
-      ;:
+      #:
         This is a comment, not part of the data.
         Still a comment!
       address ``

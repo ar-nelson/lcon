@@ -1,5 +1,5 @@
-;; A full JSON schema for a UNIX fstab-like file
-;; http://json-schema.org/example2.html
+# A full JSON schema for a UNIX fstab-like file
+# http://json-schema.org/example2.html
 
 id "http://some.site.somewhere/entry-schema#"
 $schema "http://json-schema.org/draft-04/schema#"

@@ -1,11 +1,11 @@
-;;; A command-line postfix calculator, written in an experimental JSON-LISP
-;;; language using LCON as its base syntax.
-;;;
-;;; Adam R. Nelson
-;;;
-;;; August 20, 2014
+# A command-line postfix calculator, written in an experimental JSON-LISP
+# language using LCON as its base syntax.
+#
+# Adam R. Nelson
+#
+# August 20, 2014
 
-with-conveniences ;; $ for get
+with-conveniences # $ for get
   do
     until get-var done
     do seq

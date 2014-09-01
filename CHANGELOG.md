@@ -2,6 +2,7 @@
 
 ## 1.0.0-git
 
+- Changed comment character from `;` to `#`.
 - Changed bullet character from `.` to `-`.
 - Removed single-quoted strings.
 - Lexer now treats colons as whitespace (fixed error when parsing JSON).

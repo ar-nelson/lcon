@@ -27,12 +27,12 @@ export interface SourceLocation {
 
 export class Lexer {
 
-  static NEWLINE = /^((?:\s|;[^\n]*)*)\n([^\S\n]*-[^\S\n]+|[^\S\n]*-(?=[\s(\[{;"`])|[^\S\n]*)/
+  static NEWLINE = /^((?:\s|#[^\n]*)*)\n([^\S\n]*-[^\S\n]+|[^\S\n]*-(?=[\s(\[{#"`])|[^\S\n]*)/
   static BLOCK_NEWLINE = /^\n([^\S\n]*)([^\n]*)/
   static WHITESPACE = /^[^\S\n]+/
-  static LINE_COMMENT = /^\s*;[^\n]*/
-  static BLOCK_COMMENT = /^;[:][^\n]*/
-  static UNQUOTED_STRING = /^[^\s()\[\]{},;:"`]+/
+  static LINE_COMMENT = /^\s*#[^\n]*/
+  static BLOCK_COMMENT = /^#[:][^\n]*/
+  static UNQUOTED_STRING = /^[^\s()\[\]{},:"`#]+/
   static BLOCK_STRING = /^``[^\S\n]*([^\n]*)/
   static OPEN_PAREN = /^[(](?:\s*\n([^\S\n]*)|\s*)/
   static CLOSE_PAREN = /^\s*[)]/
