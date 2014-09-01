@@ -36,6 +36,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="lcon.ts" />
     <TypeScriptCompile Include="bin\lcon.bin.ts" />
+    <Content Include="CHANGELOG.md" />
     <Content Include="LICENSE" />
     <Content Include="package.json" />
     <Content Include="README.md" />
