@@ -1,0 +1,18 @@
+test1
+  a """ foo
+test2
+  a """ foo
+  b bar
+test3
+ a foo
+ b """ bar
+ c baz
+test4
+ a foo
+ b """ bar
+ c """ baz
+test5
+ a foo
+ b """ bar
+   c baz
+ d quux

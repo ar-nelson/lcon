@@ -1,0 +1,3 @@
+"""
+  This is just a block string.
+  The newline should be preserved, but the indents should not.
