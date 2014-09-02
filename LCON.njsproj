@@ -34,6 +34,42 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include=".npmignore" />
+    <Content Include="test\expected\escapes.json" />
+    <Content Include="test\expected\facebook-api-example.json" />
+    <Content Include="test\expected\fstab-schema.json" />
+    <Content Include="test\expected\glossary.json" />
+    <Content Include="test\expected\inline-block-strings.json" />
+    <Content Include="test\expected\just-a-block-string.json" />
+    <Content Include="test\expected\just-a-boolean.json" />
+    <Content Include="test\expected\just-a-null.json" />
+    <Content Include="test\expected\just-a-number.json" />
+    <Content Include="test\expected\just-a-string.json" />
+    <Content Include="test\expected\nested-lists.json" />
+    <Content Include="test\expected\simple-map-json-style.json" />
+    <Content Include="test\expected\simple-map-lcon-style.json" />
+    <Content Include="test\expected\simple-map-yaml-style.json" />
+    <Content Include="test\expected\top-level-array.json" />
+    <Content Include="test\expected\top-level-bulleted-array.json" />
+    <Content Include="test\expected\unicode-escapes.json" />
+    <Content Include="test\src\escapes.lcon" />
+    <Content Include="test\src\facebook-api-example.lcon" />
+    <Content Include="test\src\fstab-schema.lcon" />
+    <Content Include="test\src\glossary.lcon" />
+    <Content Include="test\src\inline-block-strings.lcon" />
+    <Content Include="test\src\just-a-block-string.lcon" />
+    <Content Include="test\src\just-a-boolean.lcon" />
+    <Content Include="test\src\just-a-null.lcon" />
+    <Content Include="test\src\just-a-number.lcon" />
+    <Content Include="test\src\just-a-string.lcon" />
+    <Content Include="test\src\nested-lists.lcon" />
+    <Content Include="test\src\simple-map-json-style.lcon" />
+    <Content Include="test\src\simple-map-lcon-style.lcon" />
+    <Content Include="test\src\simple-map-yaml-style.lcon" />
+    <Content Include="test\src\top-level-array.lcon" />
+    <Content Include="test\src\top-level-bulleted-array.lcon" />
+    <Content Include="test\src\unicode-escapes.lcon" />
     <TypeScriptCompile Include="lcon-test.ts" />
     <TypeScriptCompile Include="lcon.ts" />
     <TypeScriptCompile Include="bin\lcon.bin.ts" />
@@ -43,6 +79,7 @@
     <Content Include="package.json" />
     <Content Include="README.md" />
     <TypeScriptCompile Include="lcon-parser.ts" />
+    <TypeScriptCompile Include="ordered-json.ts" />
     <TypeScriptCompile Include="typings\chalk.d.ts" />
     <TypeScriptCompile Include="typings\node.d.ts" />
     <TypeScriptCompile Include="lcon-lexer.ts" />

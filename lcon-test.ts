@@ -43,7 +43,7 @@ fs.readdir(srcDir, (err, files) => {
   if (err) {
     console.error(err); exit(2)
   } else {
-    files = _.filter(files, s => s && /^.*\.lcon$/i.test(s))
+    files = _(files).filter(s => s && /^.*\.lcon$/i.test(s)).sort().reverse()
     var passed = 0, failed = 0, errored = 0
     function next(): void {
       if (files.length > 0) {
@@ -72,9 +72,9 @@ fs.readdir(srcDir, (err, files) => {
                       ++failed
                       console.log(" " +
                         chalk.bold.red(figures.cross) + "  " +
-                        chalk.bold(file) + " failed; compare " +
-                        chalk.bold(outDir + "/" + jsonFile) + " to " +
-                        chalk.bold(expectedDir + "/" + jsonFile)
+                        chalk.bold(file) + " failed;\n    compare " +
+                        chalk.bold.red(outDir + "/" + jsonFile) + "\n    to " +
+                        chalk.bold.cyan(expectedDir + "/" + jsonFile)
                       )
                       if (!fs.existsSync(outDir)) fs.mkdirSync(outDir)
                       fs.writeFileSync(
