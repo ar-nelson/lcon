@@ -1,11 +1,14 @@
 ﻿/// <reference path="../typings/node.d.ts" />
 /// <reference path="../typings/nomnom.d.ts" />
 /// <reference path="../typings/underscore.d.ts" />
+/// <reference path="../typings/chalk.d.ts" />
 /// <reference path="../lcon.ts" />
 import LCON   = require('../lcon')
 import nomnom = require('nomnom')
 import _      = require('underscore')
 import fs     = require('fs')
+import chalk  = require("chalk")
+var figures    = require("figures")
 var formatJson = require('format-json')
 
 if (process.argv.length <= 2) {
@@ -49,14 +52,18 @@ function jsonifyFilename(filename: string): string {
 }
 
 function logFailure(filename: string, error: any): void {
-  console.error(" \u2718  Failed to convert " + filename + ":")
+  console.error(chalk.bold(" " +
+    chalk.red(figures.cross) + "  Failed to convert " + filename + ":"
+  ))
   console.error()
   console.error(error)
   console.error()
 }
 
 function logSuccess(original: string, converted: string): void {
-  console.log(" \u2714  Converted " + original + " -> " + converted)
+  console.log(chalk.bold(" " +
+    chalk.green(figures.tick) + "  Converted " + original + " -> " + converted
+  ))
 }
 
 if (opts.stdout) {

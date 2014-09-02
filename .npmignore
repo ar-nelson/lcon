@@ -7,3 +7,6 @@ obj/
 *.njsproj
 *.sln
 *.suo
+*.swp
+*.tmp
+test/out/

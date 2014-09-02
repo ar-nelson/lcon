@@ -1,8 +1,9 @@
 .ntvs_analysis.dat
 *.suo
 *.swp
+*.tmp
 *.js
 *.js.map
 node_modules/
 obj/
-examples/*.json
+test/out/

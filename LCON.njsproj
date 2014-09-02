@@ -13,7 +13,7 @@
     <ProjectGuid>62d70a64-f32a-40c5-87be-5e0756fb6067</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>bin\lcon.bin.js</StartupFile>
+    <StartupFile>lcon-test.js</StartupFile>
     <StartWebBrowser>False</StartWebBrowser>
     <SearchPath>
     </SearchPath>
@@ -34,19 +34,27 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="lcon-test.ts" />
     <TypeScriptCompile Include="lcon.ts" />
     <TypeScriptCompile Include="bin\lcon.bin.ts" />
     <Content Include="CHANGELOG.md" />
+    <Content Include="extras\lcon.vim" />
     <Content Include="LICENSE" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <TypeScriptCompile Include="lcon-parser.ts" />
+    <TypeScriptCompile Include="typings\chalk.d.ts" />
     <TypeScriptCompile Include="typings\node.d.ts" />
     <TypeScriptCompile Include="lcon-lexer.ts" />
+    <TypeScriptCompile Include="typings\nomnom.d.ts" />
+    <TypeScriptCompile Include="typings\underscore.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
-    <Folder Include="examples\" />
+    <Folder Include="extras\" />
+    <Folder Include="test\" />
+    <Folder Include="test\expected\" />
+    <Folder Include="test\src\" />
     <Folder Include="typings\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
