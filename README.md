@@ -87,7 +87,7 @@ LCON.orderedToUnordered([false, "a", 5, "b", [true, 1, 2, 3]])
 
 ## Examples
 
-The below examples show JSON data that has been rewritten as LCON. The reader will first notice that it looks extremely similar to YAML; the most significant differences are the lack of colons and the use of `.` instead of `-` as a list bullet character.
+The below examples show JSON data that has been rewritten as LCON. The reader will first notice that it looks extremely similar to YAML; the most significant differences are the lack of colons and the use of `"""` to delimit indented text blocks.
 
 From [json.org](http://json.org/example):
 
