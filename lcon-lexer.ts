@@ -41,9 +41,8 @@ export class Lexer {
   static OPEN_BRACE = /^[{](?:\s*\n([^\S\n]*)|\s*)/
   static CLOSE_BRACE = /^\s*[}]/
   static COMMA = /^\s*[,](?:\s*\n([^\S\n]*)|\s*)/
-  static COLON = /^\s*[:]\s*/
+  static COLON = /^\s*[:][^\S\n]*/
   static NUMBER = /^0b[01]+|^0o[0-7]+|^0x[\da-f]+|^\d*\.?\d+(?:e[+-]?\d+)?/i
-
 
   private ends: TokenType[]
   private tokens: Token[]
@@ -94,6 +93,7 @@ export class Lexer {
     while (this.indents[0].length > 1) {
       this.token(TokenType.Outdent, this.indents[0].pop().toString(), 0, 0)
     }
+    this.token(TokenType.Outdent, "EOF", 0, 0)
     return this.tokens
   }
 

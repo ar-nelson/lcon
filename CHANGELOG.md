@@ -6,6 +6,7 @@
 - Changed comment character from `;` to `#`.
 - Changed bullet character from `.` to `-`.
 - Removed single-quoted strings.
+- Scalars (strings, numbers, booleans, null) are now valid after an indent.
 - Lexer now treats colons as whitespace (fixed error when parsing JSON).
 - Unit tests are now available, via a custom test script (lcon-test.ts). 
 - Command-line tool now has colored output.
