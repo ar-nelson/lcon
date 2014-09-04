@@ -330,7 +330,7 @@ export class Lexer {
   }
 
   private error(message: string): void {
-    throw message + " (at line " + (this.chunkLocation.line + 1) + ", column " +
+    throw message + " (at line " + this.chunkLocation.line + ", column " +
       (this.chunkLocation.column + 1) + ")"
   }
 }

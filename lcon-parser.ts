@@ -21,7 +21,7 @@ function unexpected(token: lexer.Token): void {
 }
 
 function error(message: string, token: lexer.Token): void {
-  throw message + " (at line " + (token.start.line+1) + ", column " + (token.start.column+1) + ")"
+  throw message + " (at line " + token.start.line + ", column " + (token.start.column+1) + ")"
 }
 
 export function parse(src: string): any {
