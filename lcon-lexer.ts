@@ -31,7 +31,7 @@ export class Lexer {
   static BLOCK_NEWLINE = /^\n([^\S\n]*)([^\n]*)/
   static WHITESPACE = /^[^\S\n]+/
   static LINE_COMMENT = /^\s*#[^\n]*/
-  static BLOCK_COMMENT = /^#[:][^\n]*/
+  static BLOCK_COMMENT = /^\s*#[:][^\n]*/
   static UNQUOTED_STRING = /^[^\s()\[\]{},:"#]+/
   static BLOCK_STRING = /^"""[^\S\n]*([^\n]*)/
   static OPEN_PAREN = /^[(](?:\s*\n([^\S\n]*)|\s*)/
@@ -43,6 +43,7 @@ export class Lexer {
   static COMMA = /^\s*[,](?:\s*\n([^\S\n]*)|\s*)/
   static COLON = /^\s*[:][^\S\n]*/
   static NUMBER = /^0b[01]+|^0o[0-7]+|^0x[\da-f]+|^\d*\.?\d+(?:e[+-]?\d+)?/i
+  static UNICODE_ESCAPE = /^\\u[0-9a-f]{4}/i
 
   private ends: TokenType[]
   private tokens: Token[]
@@ -56,8 +57,8 @@ export class Lexer {
     while (code.indexOf("\r") > -1) code = code.replace("\r", "")
     code = "\n" + code
     var i: number,
-      consumed: number,
-      tag: TokenType
+        consumed: number,
+        tag: TokenType
 
     this.ends = []
     this.tokens = []
@@ -70,12 +71,12 @@ export class Lexer {
     i = 0
     while (this.chunk = code.substr(i)) {
       consumed =
+        this.commentToken()    ||
         this.stringToken()     ||
         this.numberToken()     ||
         this.keywordToken()    ||
         this.symbolToken()     ||
         this.whitespaceToken() ||
-        this.commentToken()    || // FIXME: Comments may be broken w.r.t. sequential commented lines and indentation
         this.lineToken()       ||
         -1
 
@@ -188,11 +189,11 @@ export class Lexer {
     if (match) {
       var n = match[0]
       if (/^0[BOX]/.test(n)) {
-        this.error("radix prefix '" + n + "' must be lowercase")
+        this.error("Radix prefix '" + n + "' must be lowercase")
       } else if (/^0\d*[89]/.test(n)) {
-        this.error("decimal literal '" + n + "' must not be prefixed with '0'")
+        this.error("Decimal literal '" + n + "' must not be prefixed with '0'")
       } else if (/^0\d+/.test(n)) {
-        this.error("octal literal '" + n + "' must be prefixed with '0o'")
+        this.error("Octal literal '" + n + "' must be prefixed with '0o'")
       }
       var lexedLength = n.length
       if (match = /^0o([0-7]+)/.exec(n)) { // octal
@@ -282,7 +283,7 @@ export class Lexer {
       case '/': return { result: '\/', length: 2 }
       case "'": return { result: "'", length: 2 }
       case '"': return { result: '"', length: 2 }
-      case 'u': if (/^\\u[0-9a-f]{4}/i.test(strChunk)) return {
+      case 'u': if (Lexer.UNICODE_ESCAPE.test(strChunk)) return {
           result: String.fromCharCode(parseInt(strChunk.substr(2, 4), 16)),
           length: 6
         }
