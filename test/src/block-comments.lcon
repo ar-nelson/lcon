@@ -1,0 +1,14 @@
+#:
+  This is a top-level block comment.
+test1
+  foo bar #: baz
+test2
+  foo bar #: baz
+    a b
+      c d
+  e f
+test3
+  foo bar
+  a b #:
+    c d
+  e f
