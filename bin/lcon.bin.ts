@@ -4,6 +4,7 @@
 /// <reference path="../typings/chalk.d.ts" />
 /// <reference path="../lcon.ts" />
 import LCON   = require('../lcon')
+import lexer  = require('../lcon-lexer')
 import nomnom = require('nomnom')
 import _      = require('underscore')
 import fs     = require('fs')
@@ -35,6 +36,13 @@ var opts = nomnom.script("lcon").options({
     flag: true,
     help: 'Output an ordered JSON format which contains only arrays, no objects.' +
           ' First element of each array is (true, false) if it represents an (array, object).'
+  },
+  lexerMode: {
+    abbr: 'l',
+    full: 'lexer',
+    flag: true,
+    help: 'Debug mode that prints lexer tokens to standard out. When this option is set, other' +
+          ' options are ignored.'
   }
 }).parse()
 var files: string[] = opts._
@@ -66,14 +74,23 @@ function logSuccess(original: string, converted: string): void {
   ))
 }
 
-if (opts.stdout) {
+if (opts.stdout || opts.lexerMode) {
   if (files.length > 1) {
     console.error("Only one LCON file may be parsed to stdout at a time.")
   } else fs.readFile(files[0], {}, (error, data) => {
     if (error) logFailure(files[0], error)
     else {
-      try { console.log(parse(data.toString())) }
-      catch (err) { logFailure(files[0], err) }
+      try {
+        if (opts.lexerMode) {
+          console.log("")
+          _(new lexer.Lexer().tokenize(data.toString())).forEach(t => console.log(
+              lexer.TokenType[t.type] +
+              chalk.cyan(" <") +
+              chalk.green(t.value) +
+              chalk.cyan("> ") +
+              chalk.gray("(line " + t.start.line + ", column " + t.start.column + ")")))
+        } else console.log(parse(data.toString()))
+      } catch (err) { logFailure(files[0], err) }
     }
   })
 } else {
