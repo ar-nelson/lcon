@@ -49,6 +49,7 @@ export class Lexer {
   private indents: number[][]
   private chunk: string
   private chunkLocation: SourceLocation
+  private colon: number = 0
 
   tokenize(code: string, opts?: Object): Token[] {
     opts = opts || {}
@@ -69,18 +70,19 @@ export class Lexer {
     i = 0
     while (this.chunk = code.substr(i)) {
       consumed =
-      this.stringToken() ||
-      this.numberToken() ||
-      this.keywordToken() ||
-      this.symbolToken() ||
-      this.whitespaceToken() ||
-      this.commentToken() || // FIXME: Comments may be broken w.r.t. sequential commented lines and indentation
-      this.lineToken() ||
-      -1
+        this.stringToken()     ||
+        this.numberToken()     ||
+        this.keywordToken()    ||
+        this.symbolToken()     ||
+        this.whitespaceToken() ||
+        this.commentToken()    || // FIXME: Comments may be broken w.r.t. sequential commented lines and indentation
+        this.lineToken()       ||
+        -1
 
       if (consumed < 0) this.error("Unexpected " + this.chunk.charAt(0))
       this.chunkLocation = this.getLocationFromChunk(consumed)
       i += consumed
+      if (this.colon > 0) --this.colon
     }
 
     if (tag = this.ends.pop()) this.error("Missing " + TokenType[tag])
@@ -115,10 +117,10 @@ export class Lexer {
     } else if (match = Lexer.CLOSE_BRACE.exec(this.chunk)) {
       this.token(TokenType.ClosingBrace, "}", 0, match[0].length)
     } else if (match = Lexer.COMMA.exec(this.chunk)) {
-      this.token(TokenType.Comma, ",", 0, match[0].length)
       this.resetIndents(match[1] ? match[1].length : 0)
+      this.token(TokenType.Comma, ",", 0, match[0].length)
     } else if (match = Lexer.COLON.exec(this.chunk)) {
-      // Do nothing. A colon is treated as whitespace.
+      this.colon = 2
     } else return 0
     return match[0].length
   }
@@ -162,7 +164,7 @@ export class Lexer {
           if (indent > currentIndents[i]) {
             currentIndents.push(indent)
             this.token(TokenType.Indent, indent.toString(), match[1].length + 1, indent)
-          } else if (match[2].indexOf("-") == -1) {
+          } else if (match[2].indexOf("-") === -1) {
             this.token(TokenType.Newline, "\\n", match[1].length, 1)
           }
           if (match[2].indexOf("-") > -1) {
@@ -171,7 +173,13 @@ export class Lexer {
           return match[0].length
         }
       }
-      this.error("Indentation less than lowest indent in region. Missing a comma?")
+      if (this.colon === 1 && match[2].indexOf("-") === -1) {
+        // Immediately after a colon, ignore outdents.
+        // This prevents weirdly-spaced JSON from breaking the compiler.
+        return match[0].length
+      } else {
+        this.error("Indentation less than lowest indent in region. Missing a comma?")
+      }
     } else return 0
   }
 
