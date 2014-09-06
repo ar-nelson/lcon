@@ -33,7 +33,7 @@ export class Lexer {
   static LINE_COMMENT = /^\s*#[^\n]*/
   static BLOCK_COMMENT = /^\s*#[:][^\n]*/
   static UNQUOTED_STRING = /^[^\s()\[\]{},:"#]+/
-  static BLOCK_STRING = /^"""[^\S\n]*([^\n]*)/
+  static BLOCK_STRING = /^"""[^\S\n]*([^\n]*)(?:\s*(?=\n))?/
   static OPEN_PAREN = /^[(](?:\s*\n([^\S\n]*)|\s*)/
   static CLOSE_PAREN = /^\s*[)]/
   static OPEN_BRACKET = /^[\[](?:\s*\n([^\S\n]*)|\s*)/
@@ -134,7 +134,7 @@ export class Lexer {
       match = Lexer.BLOCK_NEWLINE.exec(strChunk)
       if (match && match[1].length >= _.last(_.last(this.indents))) {
         var indent = match[1].length
-        while (match && match[1].length >= indent) {
+        while (match && (match[1].length >= indent || match[0].length === match[1].length + 1)) {
           len += match[0].length
           strChunk = strChunk.substring(match[0].length)
           match = Lexer.BLOCK_NEWLINE.exec(strChunk)
@@ -237,7 +237,7 @@ export class Lexer {
         match = Lexer.BLOCK_NEWLINE.exec(strChunk)
         if (match && match[1].length > (_.last(_.last(this.indents)))) {
           var indent = match[1].length
-          while (match && match[1].length >= indent) {
+          while (match && (match[1].length >= indent || match[0].length === match[1].length+1)) {
             if (str.length > 0) str += "\n"
             str += match[0].substring(indent + 1)
             len += match[0].length
@@ -245,6 +245,7 @@ export class Lexer {
             match = Lexer.BLOCK_NEWLINE.exec(strChunk)
           }
         }
+        while (str.charAt(str.length - 1) == "\n") str = str.substring(0, str.length - 1)
         this.token(TokenType.String, str, 0, len)
         return len
       } else {

@@ -1,0 +1,6 @@
+{
+  "string1": "a b\n\nc d",
+  "string2": "a b\n  \nc d",
+  "string3": "a b\n\nc d"
+}
+

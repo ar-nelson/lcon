@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language: LCON
 " Maintainer: Adam R. Nelson
-" Latest Revision: September 1, 2014
+" Latest Revision: September 6, 2014
 
 setlocal iskeyword=!,#-',*,+,-,/,48-57,;-?,A-Z,_-z,124,~,161-255
 
@@ -25,27 +25,27 @@ syn keyword bullet -
 
 syn match linecomment /#[^\n]*$/
 
-syn match sblock0 /\v(^.*)@<=""".*\n/             nextgroup=sline1,sline2,sline3,sline4,sline5,sline6,sline7,sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
-syn match sblock1 /\v(^[ \t\-].*)@<=""".*\n/      nextgroup=sline2,sline3,sline4,sline5,sline6,sline7,sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
-syn match sblock2 /\v(^[ \t\-]{2}.*)@<=""".*\n/   nextgroup=sline3,sline4,sline5,sline6,sline7,sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
-syn match sblock3 /\v(^[ \t\-]{3}.*)@<=""".*\n/   nextgroup=sline4,sline5,sline6,sline7,sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
-syn match sblock4 /\v(^[ \t\-]{4}.*)@<=""".*\n/   nextgroup=sline5,sline6,sline7,sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
-syn match sblock5 /\v(^[ \t\-]{5}.*)@<=""".*\n/   nextgroup=sline6,sline7,sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
-syn match sblock6 /\v(^[ \t\-]{6}.*)@<=""".*\n/   nextgroup=sline7,sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
-syn match sblock7 /\v(^[ \t\-]{7}.*)@<=""".*\n/   nextgroup=sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
-syn match sblock8 /\v(^[ \t\-]{8}.*)@<=""".*\n/   nextgroup=sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
-syn match sblock9 /\v(^[ \t\-]{9}.*)@<=""".*\n/   nextgroup=sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
-syn match sblock10 /\v(^[ \t\-]{10}.*)@<=""".*\n/ nextgroup=sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
-syn match sblock11 /\v(^[ \t\-]{11}.*)@<=""".*\n/ nextgroup=sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
-syn match sblock12 /\v(^[ \t\-]{12}.*)@<=""".*\n/ nextgroup=sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
-syn match sblock13 /\v(^[ \t\-]{13}.*)@<=""".*\n/ nextgroup=sline14,sline15,sline16,sline17,sline18,sline19,sline20
-syn match sblock14 /\v(^[ \t\-]{14}.*)@<=""".*\n/ nextgroup=sline15,sline16,sline17,sline18,sline19,sline20
-syn match sblock15 /\v(^[ \t\-]{15}.*)@<=""".*\n/ nextgroup=sline16,sline17,sline18,sline19,sline20
-syn match sblock16 /\v(^[ \t\-]{16}.*)@<=""".*\n/ nextgroup=sline17,sline18,sline19,sline20
-syn match sblock17 /\v(^[ \t\-]{17}.*)@<=""".*\n/ nextgroup=sline18,sline19,sline20
-syn match sblock18 /\v(^[ \t\-]{18}.*)@<=""".*\n/ nextgroup=sline19,sline20
-syn match sblock19 /\v(^[ \t\-]{19}.*)@<=""".*\n/ nextgroup=sline20
-syn match sblock20 /\v(^[ \t\-]{19}.*)@<=""".*\n/ " Beyond this point, indented lines won't be highlighted.
+syn match sblock0 /\v(^.*)@<=""".*(\s*\n)+/             nextgroup=sline1,sline2,sline3,sline4,sline5,sline6,sline7,sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
+syn match sblock1 /\v(^[ \t\-].*)@<=""".*(\s*\n)+/      nextgroup=sline2,sline3,sline4,sline5,sline6,sline7,sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
+syn match sblock2 /\v(^[ \t\-]{2}.*)@<=""".*(\s*\n)+/   nextgroup=sline3,sline4,sline5,sline6,sline7,sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
+syn match sblock3 /\v(^[ \t\-]{3}.*)@<=""".*(\s*\n)+/   nextgroup=sline4,sline5,sline6,sline7,sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
+syn match sblock4 /\v(^[ \t\-]{4}.*)@<=""".*(\s*\n)+/   nextgroup=sline5,sline6,sline7,sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
+syn match sblock5 /\v(^[ \t\-]{5}.*)@<=""".*(\s*\n)+/   nextgroup=sline6,sline7,sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
+syn match sblock6 /\v(^[ \t\-]{6}.*)@<=""".*(\s*\n)+/   nextgroup=sline7,sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
+syn match sblock7 /\v(^[ \t\-]{7}.*)@<=""".*(\s*\n)+/   nextgroup=sline8,sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
+syn match sblock8 /\v(^[ \t\-]{8}.*)@<=""".*(\s*\n)+/   nextgroup=sline9,sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
+syn match sblock9 /\v(^[ \t\-]{9}.*)@<=""".*(\s*\n)+/   nextgroup=sline10,sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
+syn match sblock10 /\v(^[ \t\-]{10}.*)@<=""".*(\s*\n)+/ nextgroup=sline11,sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
+syn match sblock11 /\v(^[ \t\-]{11}.*)@<=""".*(\s*\n)+/ nextgroup=sline12,sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
+syn match sblock12 /\v(^[ \t\-]{12}.*)@<=""".*(\s*\n)+/ nextgroup=sline13,sline14,sline15,sline16,sline17,sline18,sline19,sline20
+syn match sblock13 /\v(^[ \t\-]{13}.*)@<=""".*(\s*\n)+/ nextgroup=sline14,sline15,sline16,sline17,sline18,sline19,sline20
+syn match sblock14 /\v(^[ \t\-]{14}.*)@<=""".*(\s*\n)+/ nextgroup=sline15,sline16,sline17,sline18,sline19,sline20
+syn match sblock15 /\v(^[ \t\-]{15}.*)@<=""".*(\s*\n)+/ nextgroup=sline16,sline17,sline18,sline19,sline20
+syn match sblock16 /\v(^[ \t\-]{16}.*)@<=""".*(\s*\n)+/ nextgroup=sline17,sline18,sline19,sline20
+syn match sblock17 /\v(^[ \t\-]{17}.*)@<=""".*(\s*\n)+/ nextgroup=sline18,sline19,sline20
+syn match sblock18 /\v(^[ \t\-]{18}.*)@<=""".*(\s*\n)+/ nextgroup=sline19,sline20
+syn match sblock19 /\v(^[ \t\-]{19}.*)@<=""".*(\s*\n)+/ nextgroup=sline20
+syn match sblock20 /\v(^[ \t\-]{19}.*)@<=""".*(\s*\n)+/ " Beyond this point, indented lines won't be highlighted.
 
 syn match sline1  /\v^[ \t].*(\s*\n)+/     contained nextgroup=sline1
 syn match sline2  /\v^[ \t]{2}.*(\s*\n)+/  contained nextgroup=sline2
@@ -68,27 +68,27 @@ syn match sline18 /\v^[ \t]{18}.*(\s*\n)+/ contained nextgroup=sline18
 syn match sline19 /\v^[ \t]{19}.*(\s*\n)+/ contained nextgroup=sline19
 syn match sline20 /\v^[ \t]{20}.*(\s*\n)+/ contained nextgroup=sline20
 
-syn match cblock0 /\v(^[^#]*)@<=#[:].*\n/             nextgroup=cline1,cline2,cline3,cline4,cline5,cline6,cline7,cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
-syn match cblock1 /\v(^[ \t\-][^#]*)@<=#[:].*\n/      nextgroup=cline2,cline3,cline4,cline5,cline6,cline7,cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
-syn match cblock2 /\v(^[ \t\-]{2}[^#]*)@<=#[:].*\n/   nextgroup=cline3,cline4,cline5,cline6,cline7,cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
-syn match cblock3 /\v(^[ \t\-]{3}[^#]*)@<=#[:].*\n/   nextgroup=cline4,cline5,cline6,cline7,cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
-syn match cblock4 /\v(^[ \t\-]{4}[^#]*)@<=#[:].*\n/   nextgroup=cline5,cline6,cline7,cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
-syn match cblock5 /\v(^[ \t\-]{5}[^#]*)@<=#[:].*\n/   nextgroup=cline6,cline7,cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
-syn match cblock6 /\v(^[ \t\-]{6}[^#]*)@<=#[:].*\n/   nextgroup=cline7,cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
-syn match cblock7 /\v(^[ \t\-]{7}[^#]*)@<=#[:].*\n/   nextgroup=cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
-syn match cblock8 /\v(^[ \t\-]{8}[^#]*)@<=#[:].*\n/   nextgroup=cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
-syn match cblock9 /\v(^[ \t\-]{9}[^#]*)@<=#[:].*\n/   nextgroup=cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
-syn match cblock10 /\v(^[ \t\-]{10}[^#]*)@<=#[:].*\n/ nextgroup=cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
-syn match cblock11 /\v(^[ \t\-]{11}[^#]*)@<=#[:].*\n/ nextgroup=cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
-syn match cblock12 /\v(^[ \t\-]{12}[^#]*)@<=#[:].*\n/ nextgroup=cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
-syn match cblock13 /\v(^[ \t\-]{13}[^#]*)@<=#[:].*\n/ nextgroup=cline14,cline15,cline16,cline17,cline18,cline19,cline20
-syn match cblock14 /\v(^[ \t\-]{14}[^#]*)@<=#[:].*\n/ nextgroup=cline15,cline16,cline17,cline18,cline19,cline20
-syn match cblock15 /\v(^[ \t\-]{15}[^#]*)@<=#[:].*\n/ nextgroup=cline16,cline17,cline18,cline19,cline20
-syn match cblock16 /\v(^[ \t\-]{16}[^#]*)@<=#[:].*\n/ nextgroup=cline17,cline18,cline19,cline20
-syn match cblock17 /\v(^[ \t\-]{17}[^#]*)@<=#[:].*\n/ nextgroup=cline18,cline19,cline20
-syn match cblock18 /\v(^[ \t\-]{18}[^#]*)@<=#[:].*\n/ nextgroup=cline19,cline20
-syn match cblock19 /\v(^[ \t\-]{19}[^#]*)@<=#[:].*\n/ nextgroup=cline20
-syn match cblock20 /\v(^[ \t\-]{19}[^#]*)@<=#[:].*\n/ " Beyond this point, indented lines won't be highlighted.
+syn match cblock0 /\v(^[^#]*)@<=#[:].*(\s*\n)+/             nextgroup=cline1,cline2,cline3,cline4,cline5,cline6,cline7,cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
+syn match cblock1 /\v(^[ \t\-][^#]*)@<=#[:].*(\s*\n)+/      nextgroup=cline2,cline3,cline4,cline5,cline6,cline7,cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
+syn match cblock2 /\v(^[ \t\-]{2}[^#]*)@<=#[:].*(\s*\n)+/   nextgroup=cline3,cline4,cline5,cline6,cline7,cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
+syn match cblock3 /\v(^[ \t\-]{3}[^#]*)@<=#[:].*(\s*\n)+/   nextgroup=cline4,cline5,cline6,cline7,cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
+syn match cblock4 /\v(^[ \t\-]{4}[^#]*)@<=#[:].*(\s*\n)+/   nextgroup=cline5,cline6,cline7,cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
+syn match cblock5 /\v(^[ \t\-]{5}[^#]*)@<=#[:].*(\s*\n)+/   nextgroup=cline6,cline7,cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
+syn match cblock6 /\v(^[ \t\-]{6}[^#]*)@<=#[:].*(\s*\n)+/   nextgroup=cline7,cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
+syn match cblock7 /\v(^[ \t\-]{7}[^#]*)@<=#[:].*(\s*\n)+/   nextgroup=cline8,cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
+syn match cblock8 /\v(^[ \t\-]{8}[^#]*)@<=#[:].*(\s*\n)+/   nextgroup=cline9,cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
+syn match cblock9 /\v(^[ \t\-]{9}[^#]*)@<=#[:].*(\s*\n)+/   nextgroup=cline10,cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
+syn match cblock10 /\v(^[ \t\-]{10}[^#]*)@<=#[:].*(\s*\n)+/ nextgroup=cline11,cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
+syn match cblock11 /\v(^[ \t\-]{11}[^#]*)@<=#[:].*(\s*\n)+/ nextgroup=cline12,cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
+syn match cblock12 /\v(^[ \t\-]{12}[^#]*)@<=#[:].*(\s*\n)+/ nextgroup=cline13,cline14,cline15,cline16,cline17,cline18,cline19,cline20
+syn match cblock13 /\v(^[ \t\-]{13}[^#]*)@<=#[:].*(\s*\n)+/ nextgroup=cline14,cline15,cline16,cline17,cline18,cline19,cline20
+syn match cblock14 /\v(^[ \t\-]{14}[^#]*)@<=#[:].*(\s*\n)+/ nextgroup=cline15,cline16,cline17,cline18,cline19,cline20
+syn match cblock15 /\v(^[ \t\-]{15}[^#]*)@<=#[:].*(\s*\n)+/ nextgroup=cline16,cline17,cline18,cline19,cline20
+syn match cblock16 /\v(^[ \t\-]{16}[^#]*)@<=#[:].*(\s*\n)+/ nextgroup=cline17,cline18,cline19,cline20
+syn match cblock17 /\v(^[ \t\-]{17}[^#]*)@<=#[:].*(\s*\n)+/ nextgroup=cline18,cline19,cline20
+syn match cblock18 /\v(^[ \t\-]{18}[^#]*)@<=#[:].*(\s*\n)+/ nextgroup=cline19,cline20
+syn match cblock19 /\v(^[ \t\-]{19}[^#]*)@<=#[:].*(\s*\n)+/ nextgroup=cline20
+syn match cblock20 /\v(^[ \t\-]{19}[^#]*)@<=#[:].*(\s*\n)+/ " Beyond this point, indented lines won't be highlighted.
 
 syn match cline1  /\v^[ \t].*(\s*\n)+/     contained nextgroup=cline1
 syn match cline2  /\v^[ \t]{2}.*(\s*\n)+/  contained nextgroup=cline2

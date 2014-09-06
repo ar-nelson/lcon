@@ -1,0 +1,33 @@
+string1 """
+  a b
+
+  c d
+
+string2 """
+  a b
+    
+  c d
+
+string3 """
+
+
+  a b
+
+  c d
+
+
+#:
+  comment ~
+
+  with ~
+
+  blanks ~
+
+#:
+
+  comment ~
+
+  with ~
+
+  blanks ~
+
