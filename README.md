@@ -6,12 +6,6 @@ LCON (pronounced "ell-con") is an alternate syntax for JSON, designed to be quic
 
 LCON was initially designed to be used as the default syntax of a Lisp-like programming language based on JSON rather than S-expressions. Many of its features are better suited for this kind of data than for configuration files or other typical applications of JSON.
 
-### WARNING: Development Version
-
-> The version of LCON in this repository is not the version in npm; it's an incomplete development version. The next version of LCON will have backwards-incompatible syntax changes, and this document describes the newer, incompatible syntax. To read about the released version of LCON, switch to the `v0.1.3` tag, or go to [npm](https://www.npmjs.org/package/lcon).
->
-> Keep in mind, though, that 0.1.3 was released without much testing, and is actually seriously broken. If you have any intention of using LCON in real software, I recommend waiting for the 1.0 release.
-
 ### Why use LCON instead of YAML?
 
 LCON is ludicrously compact (obviously). Here's [a JSON schema](http://json-schema.org/examples.html) in LCON:
@@ -68,8 +62,11 @@ Options:
 
 ### Node Library
 
-```javascript
-var LCON = require('lcon')
+TypeScript example:
+
+```typescript
+/// <reference path="./node_modules/lcon/lcon.d.ts" />
+import LCON = require('lcon')
 
 // Parse LCON like JSON, into standard JavaScript objects:
 LCON.parseUnordered("(a 5, b [1, 2, 3])")
@@ -84,6 +81,8 @@ LCON.parseOrdered("(a 5, b [1, 2, 3])")
 LCON.orderedToUnordered([false, "a", 5, "b", [true, 1, 2, 3]])
 // => {a: 5, b: [1, 2, 3]}
 ```
+
+When using ordinary JavaScript instead of TypeScript, you can include LCON with `var LCON = require('lcon')` instead.
 
 ## Examples
 

@@ -71,6 +71,7 @@
     <Content Include="test\src\top-level-bulleted-array.lcon" />
     <Content Include="test\src\unicode-escapes.lcon" />
     <TypeScriptCompile Include="lcon-test.ts" />
+    <TypeScriptCompile Include="lcon.d.ts" />
     <TypeScriptCompile Include="lcon.ts" />
     <TypeScriptCompile Include="bin\lcon.bin.ts" />
     <Content Include="CHANGELOG.md" />

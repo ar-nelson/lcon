@@ -1,7 +1,7 @@
-*.ts
-typings/
+test/out/
 node_modules/
 obj/
+.git/
 .gitignore
 .ntvs_analysis.dat
 *.njsproj
@@ -9,4 +9,3 @@ obj/
 *.suo
 *.swp
 *.tmp
-test/out/
