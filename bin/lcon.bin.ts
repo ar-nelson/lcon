@@ -30,6 +30,12 @@ var opts = nomnom.script("lcon").options({
     flag: true,
     help: 'Pretty-print JSON, with proper indentation.'
   },
+  keepOrder: {
+    abbr: 'k',
+    full: 'keep-order',
+    flag: true,
+    help: 'Preserve key order in JSON output.'
+  },
   ordered: {
     abbr: 'o',
     full: 'ordered',
@@ -38,19 +44,40 @@ var opts = nomnom.script("lcon").options({
           ' First element of each array is (true, false) if it represents an (array, object).'
   },
   lexerMode: {
-    abbr: 'l',
     full: 'lexer',
     flag: true,
-    help: 'Debug mode that prints lexer tokens to standard out. When this option is set, other' +
-          ' options are ignored.'
+    help: 'Debug mode that prints lexer tokens to stdout. When this option is set, other options' +
+          ' are ignored.'
+  },
+  rewriteMode: {
+    full: 'rewrite',
+    flag: true,
+    help: 'Debug mode that rewrites LCON data in standard format to stdout. When this option is' +
+          ' set, other options (except -k/--keep-order) are ignored.'
   }
 }).parse()
+
+if (opts.keepOrder && opts.ordered) {
+  console.error("Only one of `--keep-order` and `--ordered` may be used at a time.")
+  process.exit(3)
+}
+
+if (opts.lexerMode && opts.rewriteMode) {
+  console.error("Only one of `--lexer` and `--rewrite` may be used at a time.")
+  process.exit(3)
+}
+
 var files: string[] = opts._
 
 function parse(data: string): string {
-  var json = opts.ordered ? LCON.parseOrdered(data) : LCON.parseUnordered(data)
-  if (opts.prettyPrint) return formatJson.plain(json)
-  else return formatJson.terse(json)
+  var json = (opts.ordered || opts.keepOrder) ? LCON.parseOrdered(data) : LCON.parseUnordered(data)
+  if (opts.prettyPrint) {
+    if (opts.keepOrder) return LCON.stringifyOrderedJSON(json, 2)
+    else return formatJson.plain(json)
+  } else {
+    if (opts.keepOrder) return LCON.stringifyOrderedJSON(json)
+    else return formatJson.terse(json)
+  }
 }
 
 function jsonifyFilename(filename: string): string {
@@ -64,7 +91,8 @@ function logFailure(filename: string, error: any): void {
     chalk.red(figures.cross) + "  Failed to convert " + filename + ":"
   ))
   console.error()
-  console.error(error)
+  if (error.stack) console.log(error.stack)
+  else console.log(error)
   console.error()
 }
 
@@ -74,7 +102,7 @@ function logSuccess(original: string, converted: string): void {
   ))
 }
 
-if (opts.stdout || opts.lexerMode) {
+if (opts.stdout || opts.lexerMode || opts.rewriteMode) {
   if (files.length > 1) {
     console.error("Only one LCON file may be parsed to stdout at a time.")
   } else fs.readFile(files[0], {}, (error, data) => {
@@ -84,12 +112,18 @@ if (opts.stdout || opts.lexerMode) {
         if (opts.lexerMode) {
           console.log("")
           _(new lexer.Lexer().tokenize(data.toString())).forEach(t => console.log(
-              lexer.TokenType[t.type] +
-              chalk.cyan(" <") +
-              chalk.green(t.value) +
-              chalk.cyan("> ") +
-              chalk.gray("(line " + t.start.line + ", column " + t.start.column + ")")))
-        } else console.log(parse(data.toString()))
+            lexer.TokenType[t.type] +
+            chalk.cyan(" <") +
+            chalk.green(t.value) +
+            chalk.cyan("> ") +
+            chalk.gray("(line " + t.start.line + ", column " + t.start.column + ")")))
+        } else if (opts.rewriteMode) {
+          if (opts.keepOrder) {
+            console.log(LCON.stringifyOrdered(LCON.parseOrdered(data.toString())))
+          } else {
+            console.log(LCON.stringifyUnordered(LCON.parseUnordered(data.toString())))
+          }
+       } else console.log(parse(data.toString()))
       } catch (err) { logFailure(files[0], err) }
     }
   })

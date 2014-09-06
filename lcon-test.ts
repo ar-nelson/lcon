@@ -56,13 +56,14 @@ fs.readdir(srcDir, (err, files) => {
         fs.readFile(srcDir + "/" + file, {}, (err, data) => {
           if (err) { errorResult(err) } else {
             try {
-              var srcData = LCON.parseUnordered(data.toString())
+              var srcDataUnordered = LCON.parseUnordered(data.toString())
+              var srcDataOrdered   = LCON.parseOrdered(data.toString())
               var jsonFile = file.substring(0, file.length - 5) + ".json"
               fs.readFile(expectedDir + "/" + jsonFile, {}, (err, data) => {
                 if (err) { errorResult(err) } else {
                   try {
                     var expectedData = JSON.parse(data.toString())
-                    if (_.isEqual(srcData, expectedData)) {
+                    if (_.isEqual(srcDataUnordered, expectedData)) {
                       ++passed
                       console.log(" " +
                         chalk.bold.green(figures.tick) + "  " +
@@ -79,9 +80,36 @@ fs.readdir(srcDir, (err, files) => {
                       if (!fs.existsSync(outDir)) fs.mkdirSync(outDir)
                       fs.writeFileSync(
                         outDir + "/" + jsonFile,
-                        formatJson.plain(srcData)
+                        formatJson.plain(srcDataUnordered)
                       )
                     }
+
+                    try {
+                      if (!_.isEqual(
+                        srcDataUnordered,
+                        LCON.parseUnordered(LCON.stringifyUnordered(srcDataUnordered)))
+                      ) {
+                        console.log(" " +
+                          chalk.bold.red(figures.cross) + "  " +
+                          chalk.bold(file) + " failed unordered stringify test.")
+                      }
+                    } catch (err) {
+                      errorResult("Error in unordered stringify test: " + err)
+                    }
+
+                    try {
+                      if (!_.isEqual(
+                        srcDataOrdered,
+                        LCON.parseOrdered(LCON.stringifyOrdered(srcDataOrdered)))
+                      ) {
+                        console.log(" " +
+                          chalk.bold.red(figures.cross) + "  " +
+                          chalk.bold(file) + " failed ordered stringify test.")
+                      }
+                    } catch (err) {
+                      errorResult("Error in ordered stringify test: " + err)
+                    }
+
                     next()
                   } catch (err) { errorResult(err) }
                 }
