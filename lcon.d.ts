@@ -1,5 +1,28 @@
 ﻿declare module "lcon" {
 
+  export interface SourceLocation {
+    line: number
+    column: number
+  }
+
+  export interface SyntaxTreeBuilder<A> {
+    initObject(start: SourceLocation): A
+    initArray(start: SourceLocation): A
+    appendKeyToObject(key: string, object: A, start: SourceLocation, end: SourceLocation): void
+    appendValueToArray(value: any, array: A): void
+    appendValueToObject(value: any, object: A): void
+    closeObject(object: A, end: SourceLocation): void
+    closeArray(array: A, end: SourceLocation): void
+    lastElementOfArray(array: A): any
+    isObject(thing: any): boolean
+    processString(value: string, start: SourceLocation, end: SourceLocation): any
+    processNumber(value: number, start: SourceLocation, end: SourceLocation): any
+    processBoolean(value: boolean, start: SourceLocation, end: SourceLocation): any
+    processNull(start: SourceLocation, end: SourceLocation): any
+  }
+
+  export function parseWithBuilder<A>(src: string, builder: SyntaxTreeBuilder<A>): any
+
   /**
    * Converts ordered JSON data to normal (unordered) JSON data. Note that
    * "JSON", in this case, refers to actual JavaScript objects and arrays, not to
@@ -32,7 +55,7 @@
    * JavaScript-implementation-dependent and not guaranteed. If key order is
    * significant, use `parseOrdered` instead.
    */
-  export function parseUnordered(data: string): any
+  export function parseUnordered(src: string): any
 
   /**
    * Generates a compact LCON string from standard JavaScript data types (JSON).

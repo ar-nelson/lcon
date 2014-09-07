@@ -1,5 +1,9 @@
 ﻿# LCON Changelog
 
+## 1.1.0
+
+- Provided a hook for custom AST builders via the SyntaxTreeBuilder interface.
+
 ## 1.0.0
 
 - npm module now includes TypeScript definitions.

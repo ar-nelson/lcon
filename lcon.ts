@@ -4,12 +4,52 @@ import lexer       = require("./lcon-lexer")
 import orderedJson = require("./ordered-json")
 import _           = require("underscore")
 
+class TreeBuilderBase {
+  closeObject(object: any, end: lexer.SourceLocation): void { }
+  closeArray(array: any, end: lexer.SourceLocation): void { }
+  lastElementOfArray = _.last
+  processString(value: string, start: lexer.SourceLocation, end: lexer.SourceLocation) {
+    return value}
+  processNumber(value: number, start: lexer.SourceLocation, end: lexer.SourceLocation) {
+    return value}
+  processBoolean(value: boolean, start: lexer.SourceLocation, end: lexer.SourceLocation) {
+    return value}
+  processNull(start: lexer.SourceLocation, end: lexer.SourceLocation) {
+    return null}
+}
+
+class JsonTreeBuilder extends TreeBuilderBase implements parser.SyntaxTreeBuilder<any> {
+  private keyQueue: string[] = []
+  initObject(start: lexer.SourceLocation) {return {}}
+  initArray(start: lexer.SourceLocation) {return []}
+  appendKeyToObject(key: string, object: any, start: lexer.SourceLocation,
+    end: lexer.SourceLocation): void { this.keyQueue.push(key)}
+  appendValueToArray(value: any, array: any): void {array.push(value)}
+  appendValueToObject(value: any, object: any): void {object[this.keyQueue.shift()] = value}
+  isObject(thing: any) {return !_.isArray(thing) && !_.isString(thing) && _.isObject(thing)}
+}
+
+class OrderedJsonTreeBuilder extends TreeBuilderBase implements parser.SyntaxTreeBuilder<any[]> {
+  private keyQueue: string[] = []
+  initObject(start: lexer.SourceLocation) {return [false] }
+  initArray(start: lexer.SourceLocation) {return [true] }
+  appendKeyToObject(key: string, object: any, start: lexer.SourceLocation,
+    end: lexer.SourceLocation): void { object.push(key) }
+  appendValueToArray(value: any, array: any): void { array.push(value) }
+  appendValueToObject(value: any, object: any): void { object.push(value) }
+  isObject(thing: any) {return _.isArray(thing) && thing[0] === false }
+}
+
 export var orderedToUnordered = orderedJson.orderedToUnordered
 
-export var parseOrdered = parser.parse
+export var parseWithBuilder = parser.parseWithBuilder
 
-export function parseUnordered(data: string): any {
-  return orderedToUnordered(parseOrdered(data))
+export function parseOrdered(src: string): any {
+  return parser.parseWithBuilder(src, new OrderedJsonTreeBuilder())
+}
+
+export function parseUnordered(src: string): any {
+  return parser.parseWithBuilder(src, new JsonTreeBuilder())
 }
 
 function isLegalWithoutQuotes(str: string): boolean {

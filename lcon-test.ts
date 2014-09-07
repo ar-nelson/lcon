@@ -21,7 +21,8 @@ function errorMsg(file: string, error: any): void {
     chalk.bold.yellow(figures.warning) + "  " +
     chalk.bold(file) + " failed with error:"
   )
-  console.error(error)
+  if (error.stack) console.error(error.stack)
+  else console.error(error)
 }
 
 console.log("")
